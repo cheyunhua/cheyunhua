@@ -1,0 +1,26 @@
+
+/* CSS Document */
+
+html{font-size:62.5%;}
+body{font-size:1.8rem;  padding:0px; margin:0px;}
+*{padding:0px; margin:0px; list-style-type:none;font-family:"Microsoft YaHei"}
+a{ text-decoration:none;}
+.fa{ display:inline-block; text-align:center;}
+input{outline:none;}
+.black{ background-color:#fff;}
+.grayBg{ background-color:#f1f1f1;}
+/* 个人信息 */
+.navBt{text-align:center; height:3.8rem; line-height:3.8rem;font-size:2rem; background:#242328; color:#fff;}
+.navBt i{font-size:3rem; position:absolute; width:3.8rem;height:3.8rem; line-height:3.6rem; left:0rem; cursor:pointer; transform:0.5s;}
+.navBt b{font-size:2.6rem; position:absolute; height:3.8rem; line-height:3.6rem; right:1.4rem; cursor:pointer; transform:0.5s;}
+.navTop i{font-size:2.8rem; position:absolute; width:4rem;height:4rem; line-height:3.6rem; left:0rem; cursor:pointer; transform:0.5s;}
+.navTop{text-align:center; height:4rem; line-height:4rem;font-size:2rem; background:#f17712; color:#fff; margin-bottom:0rem;}
+/*icon*/
+.tit-head{ height:2.6rem; line-height:2.6rem; padding-left:1rem; font-size:1.6rem; color:#444;}
+.tit-content{ background-color:#fff; height:27rem; border-top:0.1rem solid #e8e8e8; border-bottom:0.1rem solid #e8e8e8;}
+.tit-content3{ height:12.6rem;}
+.tit-icon li{ float:left; width:33.33%; text-align:center; padding-top:1rem;}
+.tit-icon2 li{ padding-top:1.1rem;}
+.tit-icon li a{ display:block;}
+.tit-icon li a img{width:8rem; height:8rem;}
+.tit-icon li p{ font-size:1.6rem; color:#444444; padding-top:0.6rem;}

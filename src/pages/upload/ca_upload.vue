@@ -1,0 +1,927 @@
+<template>
+  <div class="_upload_backdiv">
+    <!-- 预览图片展示 -->
+    <el-dialog v-model="dialogVisible" size="full">
+      <img width="100%" :src="dialogImageUrl" alt="">
+    </el-dialog>
+    <div class="_upload_div">
+      <span class="_upload_span">01</span>
+      <li class="_upload_li">业务受理单
+        <p >打印件1份,加盖公章, 财务专用章
+          <span  style="color: red;margin-left: 1em   ; display: inline-block;" v-on:click="dataState('1')">{{dataState1}}</span></p>
+      </li>
+      <br><br>
+      <el-button type="danger" icon="delete" size="mini" style="margin-left: 2.6em;margin-bottom: 0.3em;" v-if="fileList_1.length>0" v-on:click="clearAll('1',fileList_1)">删除</el-button>
+      <el-button type="warning" icon="search" size="mini" :style="fileList_1.length>0?'margin-left:-0.3em;margin-bottom: 0.3em;':'margin-left: 2.6em;margin-bottom: 0.3em;'"  v-on:click="queryCaFile({'qrCodeId':qrCodeId,'type':1,'protocolCode':protocolCode,'wechatCode':wechatCode,'code':code},fileList_1);">刷新</el-button>
+      <i class="el-icon-loading" v-if='loading1'></i>
+      <div style="margin-left: 2em;" >
+        <el-upload
+          :action='actionUrl'
+          list-type="picture-card"
+          :on-preview="handlePictureCardPreview"
+          :on-remove="handleRemove"
+          :on-success="handleSuccess"
+          :before-upload="beforeUpload"
+          :file-list="fileList_1"
+          :show-file-list ="true"
+          :data="dataParm_1"
+          :multiple="false"
+          :disabled="loading1"
+        >
+        <div style="line-height: 6em;">
+          <i class="el-icon-plus"></i>
+        </div>
+        </el-upload>
+      </div>
+    </div>
+
+    <div class="_upload_div">
+      <span class="_upload_span">02</span>
+      <li class="_upload_li">电子认证服务协议书
+        <p >打印件1份，加盖公章<span  style="color: red;margin-left: 1em" v-on:click="dataState('2')">{{dataState2}}</span></p>
+      </li>
+      <br><br>
+      <el-button type="danger" icon="delete" size="mini" style="margin-left: 2.6em;margin-bottom: 0.3em;" v-if="fileList_2.length>0" v-on:click="clearAll('2',fileList_2)">删除</el-button>
+      <el-button type="warning" icon="search" size="mini" :style="fileList_2.length>0?'margin-left:-0.3em;margin-bottom: 0.3em;':'margin-left: 2.6em;margin-bottom: 0.3em;'"  v-on:click="queryCaFile({'qrCodeId':qrCodeId,'type':2,'protocolCode':protocolCode,'wechatCode':wechatCode,'code':code},fileList_2);">刷新</el-button>
+      <i class="el-icon-loading" v-if='loading2'></i>
+      <div style="margin-left: 2em"  >
+        <el-upload
+          :action='actionUrl'
+          list-type="picture-card"
+          :on-preview="handlePictureCardPreview"
+          :on-remove="handleRemove"
+          :on-success="handleSuccess"
+          :before-upload="beforeUpload"
+          :file-list="fileList_2"
+          :show-file-list ="true"
+          :data="dataParm_2"
+          :multiple="false"
+          :disabled="loading2"
+        >
+          <div style="line-height: 6em;">
+            <i class="el-icon-plus"></i>
+          </div>
+        </el-upload>
+      </div>
+    </div>
+
+    <div class="_upload_div">
+      <span class="_upload_span">03</span>
+      <li class="_upload_li">经办人身份证（正反面）
+        <p >打印件1份，加盖公章<span  style="color: red;margin-left: 1em" v-on:click="dataState('3')">{{dataState3}}</span></p>
+      </li>
+      <br><br>
+      <el-button type="danger" icon="delete" size="mini" style="margin-left: 2.6em;margin-bottom: 0.3em;" v-if="fileList_3.length>0" v-on:click="clearAll('3',fileList_3)">删除</el-button>
+      <el-button type="warning" icon="search" size="mini" :style="fileList_3.length>0?'margin-left:-0.3em;margin-bottom: 0.3em;':'margin-left: 2.6em;margin-bottom: 0.3em;'"  v-on:click="queryCaFile({'qrCodeId':qrCodeId,'type':3,'protocolCode':protocolCode,'wechatCode':wechatCode,'code':code},fileList_3);">刷新</el-button>
+      <i class="el-icon-loading" v-if='loading3'></i>
+      <div style="margin-left: 2em" >
+        <el-upload
+          :action='actionUrl'
+          list-type="picture-card"
+          :on-preview="handlePictureCardPreview"
+          :on-remove="handleRemove"
+          :on-success="handleSuccess"
+          :before-upload="beforeUpload"
+          :file-list="fileList_3"
+          :show-file-list ="true"
+          :data="dataParm_3"
+          :multiple="false"
+          :disabled="loading3"
+        >
+          <div style="line-height: 6em;">
+            <i class="el-icon-plus"></i>
+          </div>
+        </el-upload>
+      </div>
+    </div>
+
+    <div class="_upload_div">
+      <span class="_upload_span">04</span>
+      <li class="_upload_li">组织机构代码证或工商营业执照副本
+        <p >打印件1份，加盖公章 <span  style="color: red;margin-left: 1em" v-on:click="dataState('4')">{{dataState4}}</span></p>
+      </li>
+      <br><br>
+      <el-button type="danger" icon="delete" size="mini" style="margin-left: 2.6em;margin-bottom: 0.3em;" v-if="fileList_4.length>0" v-on:click="clearAll('4',fileList_4)">删除</el-button>
+      <el-button type="warning" icon="search" size="mini" :style="fileList_4.length>0?'margin-left:-0.3em;margin-bottom: 0.3em;':'margin-left: 2.6em;margin-bottom: 0.3em;'"  v-on:click="queryCaFile({'qrCodeId':qrCodeId,'type':4,'protocolCode':protocolCode,'wechatCode':wechatCode,'code':code},fileList_4);">刷新</el-button>
+      <i class="el-icon-loading" v-if='loading4'></i>
+      <div style="margin-left: 2em" >
+        <el-upload
+          :action='actionUrl'
+          list-type="picture-card"
+          :on-preview="handlePictureCardPreview"
+          :on-remove="handleRemove"
+          :on-success="handleSuccess"
+          :before-upload="beforeUpload"
+          :file-list="fileList_4"
+          :show-file-list ="true"
+          :data="dataParm_4"
+          :multiple="false"
+          :disabled="loading4"
+        >
+          <div style="line-height: 6em;">
+            <i class="el-icon-plus"></i>
+          </div>
+        </el-upload>
+      </div>
+    </div>
+
+    <div class="_upload_div">
+      <span class="_upload_span">05</span>
+      <li class="_upload_li">法人身份证（正反面）
+        <p >打印件1份，加盖公章<span  style="color: red;margin-left: 1em" v-on:click="dataState('5')">{{dataState5}}</span></p>
+      </li>
+      <br><br>
+      <el-button type="danger" icon="delete" size="mini" style="margin-left: 2.6em;margin-bottom: 0.3em;" v-if="fileList_5.length>0" v-on:click="clearAll('5',fileList_5)">删除</el-button>
+      <el-button type="warning" icon="search" size="mini" :style="fileList_5.length>0?'margin-left:-0.3em;margin-bottom: 0.3em;':'margin-left: 2.6em;margin-bottom: 0.3em;'"  v-on:click="queryCaFile({'qrCodeId':qrCodeId,'type':5,'protocolCode':protocolCode,'wechatCode':wechatCode,'code':code},fileList_5);">刷新</el-button>
+      <i class="el-icon-loading" v-if='loading5'></i>
+      <div style="margin-left: 2em" >
+        <el-upload
+          :action='actionUrl'
+          list-type="picture-card"
+          :on-preview="handlePictureCardPreview"
+          :on-remove="handleRemove"
+          :on-success="handleSuccess"
+          :before-upload="beforeUpload"
+          :file-list="fileList_5"
+          :show-file-list ="true"
+          :data="dataParm_5"
+          :multiple="false"
+          :disabled="loading5"
+        >
+          <div style="line-height: 6em;">
+            <i class="el-icon-plus"></i>
+          </div>
+        </el-upload>
+      </div>
+    </div>
+    
+    <div class="_upload_div">
+      <span class="_upload_span">06</span>
+      <li class="_upload_li">银行开户许可证
+        <p >打印件1份，加盖公章 <span  style="color: red;margin-left: 1em" v-on:click="dataState('6')">{{dataState6}}</span></p>
+      </li>
+      <br><br>
+      <el-button type="danger" icon="delete" size="mini" style="margin-left: 2.6em;margin-bottom: 0.3em;" v-if="fileList_6.length>0" v-on:click="clearAll('6',fileList_6)">删除</el-button>
+      <el-button type="warning" icon="search" size="mini" :style="fileList_6.length>0?'margin-left:-0.3em;margin-bottom: 0.3em;':'margin-left: 2.6em;margin-bottom: 0.3em;'"  v-on:click="queryCaFile({'qrCodeId':qrCodeId,'type':6,'protocolCode':protocolCode,'wechatCode':wechatCode,'code':code},fileList_6);">刷新</el-button>
+      <i class="el-icon-loading" v-if='loading6'></i>
+      <div style="margin-left: 2em" >
+        <el-upload
+          :action='actionUrl'
+          list-type="picture-card"
+          :on-preview="handlePictureCardPreview"
+          :on-remove="handleRemove"
+          :on-success="handleSuccess"
+          :before-upload="beforeUpload"
+          :file-list="fileList_6"
+          :show-file-list ="true"
+          :data="dataParm_6"
+          :multiple="false"
+          :disabled="loading6"
+        >
+          <div style="line-height: 6em;">
+            <i class="el-icon-plus"></i>
+          </div>
+        </el-upload>
+      </div>
+    </div>
+    
+    <div class="_upload_div" v-if="show">
+      <span class="_upload_span">07</span>
+      <li class="_upload_li">电子办税登记表
+        <p >打印件1份，加盖公章 <span  style="color: red;margin-left: 1em" v-on:click="dataState('7')">{{dataState7}}</span></p>
+      </li>
+      <br><br>
+      <el-button type="danger" icon="delete" size="mini" style="margin-left: 2.6em;margin-bottom: 0.3em;" v-if="fileList_7.length>0" v-on:click="clearAll('7',fileList_7)">删除</el-button>
+      <el-button type="warning" icon="search" size="mini" :style="fileList_7.length>0?'margin-left:-0.3em;margin-bottom: 0.3em;':'margin-left: 2.6em;margin-bottom: 0.3em;'"  v-on:click="queryCaFile({'qrCodeId':qrCodeId,'type':7,'protocolCode':protocolCode,'wechatCode':wechatCode,'code':code},fileList_7);">刷新</el-button>
+      <i class="el-icon-loading" v-if='loading7'></i>
+      <div style="margin-left: 2em" >
+        <el-upload
+          :action='actionUrl'
+          list-type="picture-card"
+          :on-preview="handlePictureCardPreview"
+          :on-remove="handleRemove"
+          :on-success="handleSuccess"
+          :before-upload="beforeUpload"
+          :file-list="fileList_7"
+          :show-file-list ="true"
+          :data="dataParm_7"
+          :multiple="false"
+          :disabled="loading7"
+        >
+          <div style="line-height: 6em;">
+            <i class="el-icon-plus"></i>
+          </div>
+        </el-upload>
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<script>
+  import api from '../../api/';
+  import ElementUI from 'element-ui'
+  import { Toast,Indicator ,MessageBox } from 'mint-ui'
+
+  export default{
+      data(){
+          return {
+          	show:false,
+            qrCodeId: '',//二维码id
+            protocolCode:'',//协议编号
+            noDataText: '请上传资料',
+            //图片预览地址
+            dialogImageUrl: '',
+            //图片预览默认隐藏
+            dialogVisible: false,
+            wechatCode:'',
+            code:'',
+//          actionUrl: '/thirdparty/ocsp/wechatCaFileService/uploadCaFile',
+            actionUrl: '/thirdparty/ocsp/wechatYsCaFileService/uploadCaFile',
+//            actionUrl: api.uploadCaFileUrl(),
+            //附件1 --------------
+            fileList_1: [],
+            dataParm_1: {'type':'1', 'qrCodeId':null, 'sort': '','protocolCode':'','wechatCode':'','code':''},//业务受理单
+            dataState1: '',//材料审核状态
+            dataStateReason1: '',//材料审核状态原因
+            loading1:true,//数据加载中
+            //----------------------
+            //附件2 --------------
+            fileList_2: [],
+            dataParm_2: {'type':'2', 'qrCodeId':null, 'sort':'','protocolCode':'','wechatCode':'','code':''},//电子认证服务协议书
+            dataState2: '',//材料审核状态
+            dataStateReason2: '',//材料审核状态原因
+            loading2:true,//数据加载中
+            //----------------------
+            //附件3 --------------
+            fileList_3: [],
+            dataParm_3: {'type':'3', 'qrCodeId':null, 'sort':'','protocolCode':'','wechatCode':'','code':''},//经办人身份证（正反面）
+            dataState3: '',//材料审核状态
+            dataStateReason3: '',//材料审核状态原因
+            loading3:true,//数据加载中
+            //----------------------
+            //附件4 --------------
+            fileList_4: [],
+            dataParm_4: {'type':'4', 'qrCodeId':null, 'sort':'','protocolCode':'','wechatCode':'','code':''},//组织机构代码证或工商营业执照副本
+            dataState4: '',//材料审核状态
+            dataStateReason4: '',//材料审核状态原因
+            loading4:true,//数据加载中
+            //----------------------
+            //附件5 --------------
+            fileList_5: [],
+            dataParm_5: {'type':'5', 'qrCodeId':null, 'sort':'','protocolCode':'','wechatCode':'','code':''},//法人身份证（正反面）
+            dataState5: '',//材料审核状态
+            dataStateReason5: '',//材料审核状态原因
+            loading5:true,//数据加载中
+            //----------------------
+            //附件6 --------------
+            fileList_6: [],
+            dataParm_6: {'type':'6', 'qrCodeId':null, 'sort':'','protocolCode':'','wechatCode':'','code':''},//银行开户许可证
+            dataState6: '',//材料审核状态
+            dataStateReason6: '',//材料审核状态原因
+            loading6:true,//数据加载中
+            //----------------------
+            //附件7 --------------
+            fileList_7: [],
+            dataParm_7: {'type':'7', 'qrCodeId':null, 'sort':'','protocolCode':'','wechatCode':'','code':''},//银行开户许可证
+            dataState7: '',//材料审核状态
+            dataStateReason7: '',//材料审核状态原因
+            loading7:true,//数据加载中
+            //----------------------
+          }
+      },
+      mounted(){
+
+        //js判断Android和iOS
+/*        var u = navigator.userAgent;
+        if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
+          console.log('安卓');
+        } else if (u.indexOf('iPhone') > -1) {
+          console.log('IOS');
+        } else if (u.indexOf('Windows Phone') > -1) {
+          console.log('Windows Phone');
+        }*/
+
+//          this.qrCodeId = this.$route.query.qrCodeId != undefined ? this.$route.query.qrCodeId : '';
+//        this.qrCodeId = this.$route.query.qrCodeId != undefined ? this.$route.query.qrCodeId : '3814506566';
+        this.qrCodeId = this.$route.query.qrCodeId != undefined ? this.$route.query.qrCodeId : '';
+        this.protocolCode = this.$route.query.protocolCode != undefined ? this.$route.query.protocolCode : '';
+	      this.code = localStorage.getItem("wx.user.code");
+        this.wechatCode = localStorage.getItem("wx.user.wechat.code");;
+        //初始化参数
+        this.initParamData();
+        this.queryFiles();
+      },
+      methods: {
+        handleRemove(file, fileList){
+              MessageBox.confirm('要删除此资料吗?').then(action => {
+            var params = {};
+            params.qrCodeId = this.qrCodeId;
+            params.type = file.type;
+            params.sort = file.xh;
+            params.wechatCode = this.wechatCode;
+            params.code = this.code;
+            params.protocolCode = this.protocolCode;
+            api.deleteCaFileForys(params).then((response) => {
+              if (response.data.head.errorCode == '0') {
+                this.$message.success('删除成功！');
+                switch(file.type){
+                  case 1:
+                    this.fileList_1 = fileList;
+                    break;
+                  case 2:
+                    this.fileList_2 = fileList;
+                    break;
+                  case 3:
+                    this.fileList_3 = fileList;
+                    break;
+                  case 4:
+                    this.fileList_4 = fileList;
+                    break;
+                  case 5:
+                    this.fileList_5 = fileList;
+                    break;
+                  case 6:
+                    this.fileList_6 = fileList;
+                    break;
+                  case 7:
+                    this.fileList_7 = fileList;
+                    break;  
+                }
+              }
+            }).catch((response) => {
+              this.$message.error('哎呀！网络出了点问题，请稍后重试！');
+            });
+          }).catch((response) => {
+                  let opationCount = 0;
+                for(let i=0;i<fileList.length;i++){
+                    var sort = fileList[i].xh
+                    if (Number(file.xh) > Number(sort)) {
+                      fileList.splice(i,0,file);
+                      opationCount++;
+                      break;
+                    }
+                }
+                if(opationCount==0){
+                  fileList.push(file);
+                }
+              });
+        },
+        handlePictureCardPreview(file) {
+          this.dialogImageUrl = file.url;
+          this.dialogVisible = true;
+        },
+        beforeUpload(file) {
+          //判断扫描id
+          let isQrCodeId = true;
+          //let isQrCodeId = false;
+          /*if(this.qrCodeId){
+            isQrCodeId = true;
+          }else{
+            this.$message.error('扫描QrCode为空！');
+          }*/
+         
+
+          //判断图片大小和图片格式
+          let isImg = false ;
+          if(file.type === 'image/jpeg'){
+            isImg = true;
+          }
+          if(file.type === 'image/png'){
+            isImg = true;
+          }
+          if(file.type === 'image/bmp'){
+            isImg = true;
+          }
+          const isLt5M = file.size / 1024 / 1024 < 5;
+          if (!isImg) {
+            this.$message.error('上传CA资料只能是 JPG、PNG、BMP格式!');
+          }
+          if (!isLt5M) {
+            this.$message.error('上传CA资料大小不能超过 5MB!');
+          }
+          return isImg && isLt5M && isQrCodeId;
+        },
+        uploadMethod(){
+
+        },
+        handleSuccess(response, file, fileList){
+            if(response.head.errorCode === '0'){
+            	console.log(response);
+                switch(response.body.type){
+                  case "1":
+                    file.xh =response.body.sort;
+                    file.type =1;
+                    this.fileList_1 = fileList;
+                    break;
+                  case "2":
+                    file.xh =response.body.sort;
+                    file.type =2;
+                    this.fileList_2 = fileList;
+                    break;
+                  case "3":
+                    file.xh =response.body.sort;
+                    file.type =3;
+                    this.fileList_3 = fileList;
+                    break;
+                  case "4":
+                    file.xh =response.body.sort;
+                    file.type =4;
+                    this.fileList_4 = fileList;
+                    break;
+                  case "5":
+                    file.xh =response.body.sort;
+                    file.type =5;
+                    this.fileList_5 = fileList;
+                    break;
+                  case "6":
+                    file.xh =response.body.sort;
+                    file.type =6;
+                    this.fileList_6 = fileList;
+                    break;
+                  case "7":
+                    file.xh =response.body.sort;
+                    file.type =7;
+                    this.fileList_7 = fileList;
+                    break;    
+                }
+              this.$message.success(response.head.errorMsg);
+            }else{
+              fileList.pop();
+              console.info(response);
+              this.$message.error(response.head.errorMsg);
+            }
+        },
+        initParamData(){
+          //二维码id
+          this.dataParm_1.qrCodeId = this.qrCodeId;
+          this.dataParm_2.qrCodeId = this.qrCodeId;
+          this.dataParm_3.qrCodeId = this.qrCodeId;
+          this.dataParm_4.qrCodeId = this.qrCodeId;
+          this.dataParm_5.qrCodeId = this.qrCodeId;
+          this.dataParm_6.qrCodeId = this.qrCodeId;
+          this.dataParm_7.qrCodeId = this.qrCodeId;
+          //协议编号
+          this.dataParm_1.protocolCode = this.protocolCode;
+          this.dataParm_2.protocolCode = this.protocolCode;
+          this.dataParm_3.protocolCode = this.protocolCode;
+          this.dataParm_4.protocolCode = this.protocolCode;
+          this.dataParm_5.protocolCode = this.protocolCode;
+          this.dataParm_6.protocolCode = this.protocolCode;
+          this.dataParm_7.protocolCode = this.protocolCode;
+          //协议编号
+          this.dataParm_1.code = this.code;
+          this.dataParm_2.code = this.code;
+          this.dataParm_3.code = this.code;
+          this.dataParm_4.code = this.code;
+          this.dataParm_5.code = this.code;
+          this.dataParm_6.code = this.code;
+          this.dataParm_7.code = this.code;
+          //协议编号
+          this.dataParm_1.wechatCode = this.wechatCode;
+          this.dataParm_2.wechatCode = this.wechatCode;
+          this.dataParm_3.wechatCode = this.wechatCode;
+          this.dataParm_4.wechatCode = this.wechatCode;
+          this.dataParm_5.wechatCode = this.wechatCode;
+          this.dataParm_6.wechatCode = this.wechatCode;
+          this.dataParm_7.wechatCode = this.wechatCode;
+          //初始化图片排序
+          this.dataParm_1.sort = this.fileList_1.length;
+          this.dataParm_2.sort = this.fileList_2.length;
+          this.dataParm_3.sort = this.fileList_3.length;
+          this.dataParm_4.sort = this.fileList_4.length;
+          this.dataParm_5.sort = this.fileList_5.length;
+          this.dataParm_6.sort = this.fileList_6.length;
+          this.dataParm_7.sort = this.fileList_7.length;
+        },
+        queryFiles(){
+          let params1 = {};
+          params1.qrCodeId = this.qrCodeId;
+          params1.protocolCode = this.protocolCode;
+          params1.wechatCode = this.wechatCode;
+          params1.code = this.code;
+          params1.type = 1
+          let params2 = {};
+          params2.qrCodeId = this.qrCodeId;
+          params2.protocolCode = this.protocolCode;
+          params2.wechatCode = this.wechatCode;
+          params2.code = this.code;
+          params2.type = 2
+          let params3 = {};
+          params3.qrCodeId = this.qrCodeId;
+          params3.protocolCode = this.protocolCode;
+          params3.wechatCode = this.wechatCode;
+          params3.code = this.code;
+          params3.type = 3
+          let params4 = {};
+          params4.qrCodeId = this.qrCodeId;
+          params4.protocolCode = this.protocolCode;
+          params4.wechatCode = this.wechatCode;
+          params4.code = this.code;
+          params4.type = 4
+          let params5 = {};
+          params5.qrCodeId = this.qrCodeId;
+          params5.protocolCode = this.protocolCode;
+          params5.wechatCode = this.wechatCode;
+          params5.code = this.code;
+          params5.type = 5
+          let params6 = {};
+          params6.qrCodeId = this.qrCodeId;
+          params6.protocolCode = this.protocolCode;
+          params6.wechatCode = this.wechatCode;
+          params6.code = this.code;
+          params6.type = 6
+          let params7 = {};
+          params7.qrCodeId = this.qrCodeId;
+          params7.protocolCode = this.protocolCode;
+          params7.wechatCode = this.wechatCode;
+          params7.code = this.code;
+          params7.type = 7
+          this.queryCaFile(params1,this.fileList_1);
+          this.queryCaFile(params3,this.fileList_2);
+          this.queryCaFile(params2,this.fileList_3);
+          this.queryCaFile(params4,this.fileList_4);
+          this.queryCaFile(params5,this.fileList_5);
+          this.queryCaFile(params6,this.fileList_6);
+         /* this.queryCaFile(params7,this.fileList_7);*/
+        },
+        clearAll(type,fileList){
+          MessageBox.confirm('要删除此资料吗?').then(action => {
+            var params = {};
+            params.type = type;
+            params.qrCodeId = this.qrCodeId;
+            params.protocolCode = this.protocolCode;
+            params.wechatCode = this.wechatCode;
+            params.code = this.code;
+            api.deleteCaFileForys(params).then((response) => {
+              if (response.data.head.errorCode == '0') {
+                fileList.splice(0,fileList.length)
+                this.$message.success('删除成功！');
+              }
+            }).catch((response) => {
+              this.$message.error('哎呀！网络出了点问题，请稍后重试！');
+            });
+          }).catch((response)=>{
+
+          })
+        },
+        dataState(type){
+          switch(type){
+            case "1":
+              if(this.dataStateReason1){
+                this.$message.warning(this.dataStateReason1);
+              }
+              break;
+            case "2":
+              if(this.dataStateReason2){
+                this.$message.warning(this.dataStateReason2);
+              }
+              break;
+            case "3":
+              if(this.dataStateReason3){
+                this.$message.warning(this.dataStateReason3);
+              }
+              break;
+            case "4":
+              if(this.dataStateReason4){
+                this.$message.warning(this.dataStateReason4);
+              }
+              break;
+            case "5":
+              if(this.dataStateReason5){
+                this.$message.warning(this.dataStateReason5);
+              }
+              break;
+            case "6":
+              if(this.dataStateReason6){
+                this.$message.warning(this.dataStateReason6);
+              }
+              break;  
+            case "7":
+              if(this.dataStateReason7){
+                this.$message.warning(this.dataStateReason7);
+              }
+              break;    
+          }
+        },
+        queryCaFile(params,fileList){
+          fileList.splice(0,fileList.length);
+          switch(params.type){
+            case 1:
+              this.loading1 = true;
+              break;
+            case 2:
+              this.loading2 = true;
+              break;
+            case 3:
+              this.loading3 = true;
+              break;
+            case 4:
+              this.loading4 = true;
+              break;
+            case 5:
+              this.loading5 = true;
+              break;
+            case 6:
+              this.loading6 = true;
+              break;
+            case 7:
+              this.loading7 = true;
+              break;  
+          }
+          api.queryCaFileForys(params).then((response) => {
+            if (response.data.head.errorCode == '0') {
+//                var resultData = response.data.data;
+                var resultData = response.data.body;
+                switch (params.type){
+                  case 1:
+                    var examineResult = resultData.examineResult;
+                    var files = resultData.fileRespData.files;
+                    //未上传资料判断
+                    if(!examineResult&&files&&files.length<1){
+                        this.dataState1 = "请上传资料";
+                        this.loading1 = false; 
+                        break;
+                    }
+                    //只获取前两只图
+                    for(let i=0;i<files.length;i++){
+                        if(i<4){
+                          var file = {};
+                          file.url =files[i].url;
+                          file.xh =files[i].xh;
+                          file.type =1;
+                          this.fileList_1.push(file)
+                        }
+                    }
+                    if(examineResult){
+                      this.dataState1 = examineResult.stateStr ;
+                      this.dataStateReason1 = examineResult.failReason ;
+                    }
+                    this.loading1 = false;   
+                    break;
+                  case 2:
+                    var examineResult = resultData.examineResult;
+                    var files = resultData.fileRespData.files;
+                    //未上传资料判断
+                    if(!examineResult&&files&&files.length<1){
+                      this.dataState2 = "请上传资料";
+                      this.loading2 = false;
+                      break;
+                    }
+                    for(let i=0;i<files.length;i++){
+                      if(i<4){
+                        var file = {};
+                        file.url =files[i].url;
+                        file.xh =files[i].xh;
+                        file.type =2;
+                        this.fileList_2.push(file)
+                      }
+                    }
+
+                    if(examineResult){
+                      this.dataState2 = examineResult.stateStr ;
+                      this.dataStateReason2 = examineResult.failReason ;
+                    }
+                    this.loading2 = false;
+                    break;
+                  case 3:
+                    var examineResult = resultData.examineResult;
+                    var files = resultData.fileRespData.files;
+                    //未上传资料判断
+                    if(!examineResult&&files&&files.length<1){
+                      this.dataState3 = "请上传资料";
+                      this.loading3 = false;
+                      break;
+                    }
+                    for(let i=0;i<files.length;i++){
+                      if(i<4){
+                        var file = {};
+                        file.url =files[i].url;
+                        file.xh =files[i].xh;
+                        file.type =3;
+                        this.fileList_3.push(file)
+                      }
+                    }
+                    if(examineResult){
+                      this.dataState3 = examineResult.stateStr ;
+                      this.dataStateReason3 = examineResult.failReason ;
+                    }
+                    this.loading3 = false;
+                    break;
+                  case 4:
+                    var examineResult = resultData.examineResult;
+                    var files = resultData.fileRespData.files;
+                    //未上传资料判断
+                    if(!examineResult&&files&&files.length<1){
+                      this.dataState4 = "请上传资料";
+                      this.loading4 = false;
+                      break;
+                    }
+                    for(let i=0;i<files.length;i++){
+                      if(i<4){
+                        var file = {};
+                        file.url =files[i].url;
+                        file.xh =files[i].xh;
+                        file.type =4;
+                        this.fileList_4.push(file)
+                      }
+                    }
+                    if(examineResult){
+                      this.dataState4 = examineResult.stateStr ;
+                      this.dataStateReason4 = examineResult.failReason ;
+                    }
+                    this.loading4 = false;
+                    break;
+                  case 5:
+                    var examineResult = resultData.examineResult;
+                    var files = resultData.fileRespData.files;
+                    //未上传资料判断
+                    if(!examineResult&&files&&files.length<1){
+                      this.dataState5 = "请上传资料";
+                      this.loading5 = false;
+                      break;
+                    }
+                    for(let i=0;i<files.length;i++){
+                      if(i<4){
+                        var file = {};
+                        file.url =files[i].url;
+                        file.xh =files[i].xh;
+                        file.type =5;
+                        this.fileList_5.push(file)
+                      }
+                    }
+                    if(examineResult){
+                      this.dataState5 = examineResult.stateStr ;
+                      this.dataStateReason5 = examineResult.failReason ;
+                    }
+                    this.loading5 = false;
+                    break;
+                  case 6:
+                    var examineResult = resultData.examineResult;
+                    var files = resultData.fileRespData.files;
+                    //未上传资料判断
+                    if(!examineResult&&files&&files.length<1){
+                      this.dataState6 = "请上传资料";
+                      this.loading6 = false;
+                      break;
+                    }
+                    for(let i=0;i<files.length;i++){
+                      if(i<4){
+                        var file = {};
+                        file.url =files[i].url;
+                        file.xh =files[i].xh;
+                        file.type =6;
+                        this.fileList_6.push(file)
+                      }
+                    }
+                    if(examineResult){
+                      this.dataState6 = examineResult.stateStr ;
+                      this.dataStateReason6 = examineResult.failReason ;
+                    }
+                    this.loading6 = false;
+                    break;
+                  case 7:
+                    var examineResult = resultData.examineResult;
+                    var files = resultData.fileRespData.files;
+                    //未上传资料判断
+                    if(!examineResult&&files&&files.length<1){
+                      this.dataState7 = "请上传资料";
+                      this.loading7 = false;
+                      break;
+                    }
+                    for(let i=0;i<files.length;i++){
+                      if(i<4){
+                        var file = {};
+                        file.url =files[i].url;
+                        file.xh =files[i].xh;
+                        file.type =7;
+                        this.fileList_7.push(file)
+                      }
+                    }
+                    if(examineResult){
+                      this.dataState7 = examineResult.stateStr ;
+                      this.dataStateReason7 = examineResult.failReason ;
+                    }
+                    this.loading7 = false;
+                    break;    
+                }
+            }else{
+              switch(params.type){
+                case 1:
+                  this.loading1 = false;
+                  this.$message.error("资料1"+response.data.head.errorMsg)
+                  break;
+                case 2:
+                  this.loading2 = false;
+                  this.$message.error("资料2"+response.data.head.errorMsg)
+                  break;
+                case 3:
+                  this.loading3 = false;
+                  this.$message.error("资料3"+response.data.head.errorMsg)
+                  break;
+                case 4:
+                  this.loading4 = false;
+                  this.$message.error("资料4"+response.data.head.errorMsg)
+                  break;
+                case 5:
+                  this.loading5 = false;
+                  this.$message.error("资料5"+response.data.head.errorMsg)
+                  break;
+                case 6:
+                  this.loading6 = false;
+                  this.$message.error("资料6"+response.data.head.errorMsg)
+                  break;  
+                case 7:
+                  this.loading7 = false;
+                  this.$message.error("资料7"+response.data.head.errorMsg)
+                  break;   
+              }
+            }
+          }).catch((response) => {
+            this.$message.error('哎呀！网络出了点问题，请稍后重试！');
+          });
+        }
+      }
+  }
+
+</script>
+
+<style>
+  .el-upload__input{
+    display: none!important;
+  }
+  .el-upload-list__item{
+    width: 6em!important;
+    height: 6em!important;
+  }
+  .el-upload--picture-card{
+    width: 5.6em!important;
+    height: 5.6em!important;
+    margin:0px 8px 10px 0!important;
+  }
+  .el-upload-list__item-preview{
+    float: right;
+    margin-top: -0.3em!important;
+    line-height: 1em;
+  }
+  .el-upload-list__item-delete{
+    float: left;
+    margin-left: -0em!important;
+    margin-top: -0.3em!important;
+    line-height: 1em;
+  }
+  .el-icon-view {
+    font-size: 0.7em;
+  }
+  .el-icon-delete2{
+    font-size: 0.7em;
+  }
+  ._upload_btn{
+    float: left;
+    cursor: pointer;
+    background-color: #f17712;
+    color: #fff;
+    font-size: 100%;
+    clear: right;
+    margin: 1em 2em 2em;
+    border-radius: 0.3em;
+    width: 32%;
+  }
+  ._upload_span{
+    display: block;
+    float: left;
+    font-size: 110%;
+    width: 1.5em;
+    text-align: center;
+    background-color: #f17712;
+    color: #fff;
+    border-radius: 3px;
+  }
+  ._upload_li{
+    display: block;
+    float: left;
+    font-size: 100%;
+    margin-left: 0.4em;
+    color: #f17712;
+  }
+  ._upload_li p{
+    color: #a2a2a2
+  }
+  ._upload_div{
+    border-bottom: 1px solid #CCC;
+    overflow: hidden;
+    margin: 0.4em 0px 0.4em 1em;
+    border-bottom-style: dashed;
+  }
+  ._upload_backdiv{
+    background-color: white;
+  }
+  .el-loading-spinner .circular{
+    width: 20px!important;
+  }
+  ._upload_li>p>span {
+  	display: inline-block;
+  }
+
+
+</style>

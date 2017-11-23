@@ -1,0 +1,221 @@
+p{
+	margin: 0;
+}
+.fx-wrapper{
+	/*margin-bottom: 5rem;*/
+}
+
+ul{
+	padding: 0;
+}
+body{
+	background: #f3f3f3;
+}
+/**修改bootsrtap样式**/
+
+/**颜色**/
+.fx-white{
+	background: #FFFFFF;
+}
+.fx-gray{
+	background: #f3f3f3;
+}
+.fc-color-orange{
+	color: #f17712;
+}
+.fc-color-white{
+	color: #FFFFFF;
+}
+/**头部**/
+.fx-header-text {
+	background: #f17712;
+	height: 4.5rem;
+	color: #FFFFFF;
+	position: relative;
+}
+.fx-header-top {
+	text-align: center;
+	height: 3.8rem;
+	line-height: 3.8rem;
+	font-size: 2rem;
+	background: #242328;
+	color: #fff;
+}
+.fx-orange {
+  background: #FF7043;
+}
+.fx-header-top i {
+	/*font-size: 3rem;*/
+	position: absolute;
+	width: 3.8rem;
+	height: 3.8rem;
+	line-height: 3.6rem;
+	left: 0rem;
+	cursor: pointer;
+	transform: 0.5s;
+
+}
+
+.fx-header-top b {
+	font-size: 2.6rem;
+	position: absolute;
+	height: 3.8rem;
+	line-height: 3.6rem;
+	right: 1.4rem;
+	cursor: pointer;
+	transform: 0.5s;
+}
+
+.fx-header p,
+.fx-wrapper {
+	font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.fx-left {
+	position: absolute;
+	left: 1.2rem;
+	line-height: 4.5rem;
+}
+
+.fx-right {
+	position: absolute;
+	right: 0.3rem;
+	display: inline-flex;
+}
+
+.fx-right i {
+	line-height: 4.5rem;
+	margin-right: 1.4rem;
+    font-size: 2rem;
+}
+
+.fa-angle-bottom {
+	margin-left: 0.8rem;
+}
+
+.fx-text {
+	width: 7.7rem;
+	height: 2.7rem;
+	border: 0.1rem solid #EEEEEE;
+	border-radius: 0.8rem;
+	position: relative;
+	top: 0.8rem;
+	text-align: center;
+	line-height: 2.7rem;
+	right: 1.5rem;
+}
+
+
+/**类型**/
+.col-xs-6{
+	text-align: center;
+}
+.col-xs-6 i{
+	font-size: 2rem;
+}
+.col-xs-4{
+	text-align: center;
+}
+.col-xs-4 p{
+	text-align: center;
+}
+.fx-style-num .col-xs-4{
+	padding: 0;
+}
+.fc-background{
+	background: #fdeee2;
+}
+.fx-border{
+	border-left: 0.1rem solid #e3e3e3;
+	border-right: 0.1rem solid #e3e3e3;
+}
+.fx-style-header {
+	height: 4.5rem;
+	line-height: 4.5rem;
+}
+
+.fx-style-num{
+	border-top: 0.1rem solid #e3e3e3;
+	/*border-bottom: 0.1rem solid #e3e3e3;*/
+}
+.fx-style-num .row .col-xs-4 {
+	height: 10.3rem;
+}
+.fx-style-num .row div img{
+	margin: 1.2rem 0;
+}
+
+/**列表**/
+.conten-text{
+	height: 3.9rem;
+	background: #f3f3f3;
+	line-height: 3.9rem;
+}
+.conten-text p {
+	margin: 0 1.2rem;
+}
+.conten-text span{
+	color: #f17712;
+}
+/**列表**/
+
+.listdiv ul a {
+	border-bottom: 0.1rem solid #e8e8e8;
+	height: 4.8rem;
+	line-height: 4.8rem;
+	text-decoration: none;
+	color: #444444;
+	display: block;
+	font-size: 1.6rem;
+	background-color: #fff;
+	transition: 0.5s;
+  font-weight: 600;
+}
+
+.listdiv ul a:hover {
+	background-color: #f9f9f9;
+}
+
+.listdiv ul a img {
+	vertical-align: middle;
+	width: 2.6rem;
+	margin: 0 1rem;
+}
+
+.fx-span-right {
+	color: #b1b1b1;
+	position: absolute;
+	right: 1.4rem;
+}
+
+.listdiv ul a span i {
+	color: #b1b1b1;
+	font-size: 2.4rem;
+	padding-left: 1rem;
+}
+
+
+/**底部列表**/
+.fc-bottom .row{
+	width:100%;
+    height:5rem;
+    margin:0 auto;
+    background:#ffffff;
+    position:fixed;
+    bottom:0;
+    text-align:center;
+	margin-top: 5rem;
+}
+.fc-bottom .row div img{
+	width: 3.1rem;
+}
+
+.fc-border{
+	border-right: 0.1rem solid #e3e3e3;
+	border-top: 0.1rem solid #e3e3e3;
+}
+
+.col-xs-4{
+	text-align:center;
+}
