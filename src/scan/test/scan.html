@@ -1,0 +1,130 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>二维码扫描登录</title>
+    <script src="json2.js"></script>
+
+<script src="jquery.min.js"></script>
+<script >
+
+var Interval;
+var params;
+function getUuid(){
+  var len=32;//32长度
+  var radix=16;//16进制
+  var chars='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');var uuid=[],i;radix=radix||chars.length;if(len){for(i=0;i<len;i++)uuid[i]=chars[0|Math.random()*radix];}else{var r;uuid[8]=uuid[13]=uuid[18]=uuid[23]='-';uuid[14]='4';for(i=0;i<36;i++){if(!uuid[i]){r=0|Math.random()*16;uuid[i]=chars[(i==19)?(r&0x3)|0x8:r];}}}
+  return uuid.join('');
+}
+
+
+function getQueryString(name) {
+		var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+		var r = window.location.search.substr(1).match(reg)
+		if(r != null) return unescape(r[2]);
+		return null
+	}
+
+$(document).ready(function(){
+
+    var paramConfig={"wxf664fe22ede5921e":"fj_bszs_scan","wx2b990f90807b19f2":"gs_bszs_scan"};
+    var appid=getQueryString("appid");
+    var userId=getQueryString("userId");
+    var ywlx=paramConfig[appid];
+    params={'appid':appid,'userId':userId,'sqqcodeid':'','ywlx':ywlx};
+	  $.ajax({
+                url: 'http://twx.jchl.com/gateway/wechat/thirdparty/ocsp/scan/loginscan?requestId=' + getUuid() +'&appId=000101',
+                type: "POST",
+                cache: false,
+                async: true,
+                data: JSON.stringify(params), //传入组装的参数
+				contentType: 'application/json;charset=utf-8',
+                dataType: "json",  //类型
+                success: function (response) {
+
+                    if (response.head.errorCode == '0') {
+					  var ticket=response.body.ticket
+                         // console.info("ticket=" + ticket);
+						  var imgurl = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + ticket;
+
+						  $("#app").attr('src',imgurl);
+
+						   params.sqqcodeid = response.body.sqqcodeid;
+
+						  Interval=setInterval(listenscan, 2000);
+                    }
+                },
+                error: function (e) {
+                    //console.log("异常");
+
+                }
+            });
+
+
+	  $("#app").click(function () {
+
+          window.location.reload();
+      })
+
+
+});
+
+
+function  listenscan(){
+
+	$.ajax({
+                url: 'http://twx.jchl.com/gateway/wechat/thirdparty/ocsp/scan/listenscan?requestId=' + getUuid() +'&appId=000101',
+                type: "POST",
+                cache: false,
+                async: true,
+                data: JSON.stringify(params), //传入组装的参数
+				contentType: 'application/json;charset=utf-8',
+                dataType: "json",  //类型
+                success: function (response) {
+
+                      if (response.body) {
+                            var sqqcodeid = response.body.sqqcodeid;
+                            //console.info("返回的sqqcodeId=" + sqqcodeid);
+                            if (sqqcodeid == '1') {//扫描登录成功
+                                clearInterval(Interval); //停止监听
+                                var registParams=response.body.userinfo;
+                                registParams=JSON.parse(registParams);
+                                //console.info("registParams="+registParams);
+                                window.external.InvokeService("OmniContainer", "NotifySendWebChat", JSON.stringify(registParams));
+
+
+                            }else if(sqqcodeid == '2'){//调用自动登录失败
+
+                                clearInterval(Interval);//停止监听
+                                alert('调用安全模块自动登录失败，请点击二维码图片刷新扫描！');
+                                //window.location.reload();
+
+                            } else if (sqqcodeid == null) {//验证码有效期过，重新刷新页面
+                                clearInterval(Interval);//停止监听
+                                $("#app").attr('src','/wechat/invalid.png');
+
+                            }
+                        }
+                },
+                error: function (e) {
+                   // console.log("异常");
+
+                }
+            });
+
+
+}
+</script>
+    <style>
+        body{
+            margin:0px 0px;
+        }
+
+    </style>
+</head>
+<body >
+
+ <img id="app" src="" style="width:265px;height: 265px;"/>
+
+</body>
+
+</html>

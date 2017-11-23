@@ -1,0 +1,29 @@
+{
+    "head":{
+        "errorCode":"0",
+        "errorMsg":"查询成功！",
+        "timestamp":1504666356055,
+        "time":125,
+        "error":false,
+        "success":true
+    },
+    "body":{
+        "head":{
+            "productBh":"91440400314869411F",
+            "productMc":"珠海市臻印象餐饮管理有限公司",
+            "productType":""
+        },
+        "contend":[
+            {
+                "sthm":"201510250027387001",
+                "productType":"纯CA",
+                "blsj":"2016-11-26 13:14:52"
+            },
+            {
+                "sthm":"201510250027387001",
+                "productType":"纯CA",
+                "blsj":"2016-11-26 13:14:52"
+            }
+        ]
+    }
+}
