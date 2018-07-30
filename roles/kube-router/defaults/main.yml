@@ -1,0 +1,17 @@
+# 更多设置，参考https://github.com/cloudnativelabs/kube-router/blob/master/docs/user-guide.md 
+
+# Router 支持开关
+ROUTER_ENABLE: "true"
+
+# NetworkPolicy 支持开关
+FIREWALL_ENABLE: "true"
+
+# service-proxy 支持开关，如选择 'false' 即使用k8s集群默认的kube-proxy
+SERVICE_PROXY: "false"
+
+# kube-router 镜像版本
+IMAGE: "cloudnativelabs/kube-router"
+PullPolicy: "IfNotPresent"
+
+# kube-router 离线镜像tar包
+kuberouter_offline: "kube-router_v0.2.0-beta.7.tar"
